@@ -12,6 +12,8 @@ namespace lab03_wordGuessGame
             Console.WriteLine("Hello World!");
             string path = "../../../myWords.txt";
             CreateFile(path);
+            ReadWords(path);
+            
         }
 
         public static void CreateFile(string path)
@@ -40,6 +42,28 @@ namespace lab03_wordGuessGame
             {
                 throw;
             }
+
+        }
+
+        public static void ReadWords(string path)
+        {
+            try
+            {
+                string[] myWords = File.ReadAllLines(path);
+                foreach (string s in myWords)
+                {
+                    Console.WriteLine(s);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static void UpdateWords(string path)
+        {
 
         }
     }

@@ -15,5 +15,13 @@ namespace wordGuessGameTest
             Program.CreateFile(path);
             Assert.True(File.Exists(path));
         }
+
+        //[Fact]
+        //public void ReadFileWorks()
+        //{
+        //    string path = "../../../test.txt";
+        //    Program.ReadFile(path);
+        //    Assert.True(File.Exists());
+        //}
     }
 }
