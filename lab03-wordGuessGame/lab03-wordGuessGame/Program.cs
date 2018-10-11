@@ -12,7 +12,9 @@ namespace lab03_wordGuessGame
             Console.WriteLine("Hello World!");
             string path = "../../../myWords.txt";
             CreateFile(path);
+            AddWord(path, "cookie");
             ReadWords(path);
+
             
         }
 
@@ -62,9 +64,20 @@ namespace lab03_wordGuessGame
             }
         }
 
-        public static void UpdateWords(string path)
+        public static void AddWord(string path, string newWord)
         {
+            try
+            {
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(newWord);
+                }
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
     }
 }
