@@ -12,7 +12,8 @@ namespace wordGuessGameTest
         public void CreateFileExists()
         {
             string path = "../../../test.txt";
-            Program.CreateFile(path);
+            string[] initialWords = { "georgia" };
+            Program.CreateFile(path, initialWords);
             Assert.True(File.Exists(path));
         }
 
@@ -22,6 +23,17 @@ namespace wordGuessGameTest
             string path = "../../../test.txt";
             Program.DeleteFile(path);
             Assert.True(!File.Exists(path));
+        }
+
+        [Fact]
+        public void WordWasRemoved()
+        {
+            string path = "../../../test.txt";
+            string[] initialWords = { "georgia", "pickles", "volcano" };
+            Program.CreateFile(path, initialWords);
+            Program.RemoveWord(path, "pickles");
+            string[] expectedWords = { "georgia", "volcano" };
+            Assert.DoesNotContain("pickles", Program.ReadWords(path));
         }
 
         //[Fact]

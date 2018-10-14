@@ -1,4 +1,3 @@
-banana
-london
 sausage
+London
 cookie

@@ -11,18 +11,20 @@ namespace lab03_wordGuessGame
         {
             Console.WriteLine("Hello World!");
             string path = "../../../myWords.txt";
-            CreateFile(path);
+            string[] initialWords = { "banana", "sausage", "London" };
+            CreateFile(path, initialWords);
             AddWord(path, "cookie");
+            RemoveWord(path, "banana");
+
             foreach (string word in ReadWords(path))
             {
                 Console.WriteLine(word);
             }
-            
             //DeleteFile(path);
-            
+
         }
 
-        public static void CreateFile(string path)
+        public static void CreateFile(string path, string[] initialWords)
         {
             try
             {
@@ -30,9 +32,11 @@ namespace lab03_wordGuessGame
                 {
                     try
                     {
-                        sw.WriteLine("banana");
-                        sw.WriteLine("london");
-                        sw.WriteLine("sausage");
+                        foreach (string word in initialWords)
+                        {
+                            sw.WriteLine(word);
+                        }
+
                     }
                     catch (Exception)
                     {
@@ -86,16 +90,49 @@ namespace lab03_wordGuessGame
             File.Delete(path);
         }
 
-        //public static void RemoveWord(string path, string wordToRemove)
-        //{
-        //    try
-        //    {
-        //        string[] currentWords = ReadWords(path);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public static void RemoveWord(string path, string wordToRemove)
+        {
+            try
+            {
+                string[] currentWords = ReadWords(path);
+
+                for (int i = 0; i < currentWords.Length; i++)
+                {
+                    if (wordToRemove == currentWords[i])
+                    {
+                        currentWords[i] = null;
+                    }
+                }
+
+                DeleteFile(path);
+
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    try
+                    {
+                        foreach (string word in currentWords)
+                        {
+                            if (word != null)
+                            {
+                                sw.WriteLine(word);
+                            }
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        sw.Close();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
