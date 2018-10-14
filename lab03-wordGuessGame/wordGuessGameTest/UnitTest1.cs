@@ -16,6 +16,14 @@ namespace wordGuessGameTest
             Assert.True(File.Exists(path));
         }
 
+        [Fact]
+        public void FileDeleted()
+        {
+            string path = "../../../test.txt";
+            Program.DeleteFile(path);
+            Assert.True(!File.Exists(path));
+        }
+
         //[Fact]
         //public void ReadFileWorks()
         //{

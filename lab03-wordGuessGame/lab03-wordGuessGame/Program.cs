@@ -14,7 +14,7 @@ namespace lab03_wordGuessGame
             CreateFile(path);
             AddWord(path, "cookie");
             ReadWords(path);
-
+            DeleteFile(path);
             
         }
 
@@ -78,6 +78,11 @@ namespace lab03_wordGuessGame
 
                 throw;
             }
+        }
+
+        public static void DeleteFile(string path)
+        {
+            File.Delete(path);
         }
     }
 }
