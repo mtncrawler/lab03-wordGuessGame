@@ -13,8 +13,12 @@ namespace lab03_wordGuessGame
             string path = "../../../myWords.txt";
             CreateFile(path);
             AddWord(path, "cookie");
-            ReadWords(path);
-            DeleteFile(path);
+            foreach (string word in ReadWords(path))
+            {
+                Console.WriteLine(word);
+            }
+            
+            //DeleteFile(path);
             
         }
 
@@ -47,15 +51,12 @@ namespace lab03_wordGuessGame
 
         }
 
-        public static void ReadWords(string path)
+        public static string[] ReadWords(string path)
         {
             try
             {
                 string[] myWords = File.ReadAllLines(path);
-                foreach (string s in myWords)
-                {
-                    Console.WriteLine(s);
-                }
+                return myWords;
             }
             catch (Exception)
             {
@@ -84,5 +85,17 @@ namespace lab03_wordGuessGame
         {
             File.Delete(path);
         }
+
+        //public static void RemoveWord(string path, string wordToRemove)
+        //{
+        //    try
+        //    {
+        //        string[] currentWords = ReadWords(path);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
     }
 }
