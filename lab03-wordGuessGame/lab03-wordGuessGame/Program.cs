@@ -13,13 +13,15 @@ namespace lab03_wordGuessGame
             string path = "../../../myWords.txt";
             string[] initialWords = { "banana", "sausage", "London" };
             CreateFile(path, initialWords);
-            AddWord(path, "cookie");
-            RemoveWord(path, "banana");
 
-            foreach (string word in ReadWords(path))
-            {
-                Console.WriteLine(word);
-            }
+            PlayGame(path);
+            //AddWord(path, "cookie");
+            //RemoveWord(path, "banana");
+
+            //foreach (string word in ReadWords(path))
+            //{
+            //    Console.WriteLine(word);
+            //}
             //DeleteFile(path);
 
         }
@@ -133,6 +135,26 @@ namespace lab03_wordGuessGame
             {
                 throw;
             }
+        }
+
+        public static void PlayGame(string path)
+        {
+            Random rand = new Random();
+            string[] wordsForGame = ReadWords(path);
+            int randomIndex = rand.Next(wordsForGame.Length);
+            string gameSolutionWord = wordsForGame[randomIndex];
+            string[] emptyCharWordToBeGuessed = new string[gameSolutionWord.Length];
+
+            for (int i = 0; i < gameSolutionWord.Length; i++)
+            {
+                emptyCharWordToBeGuessed[i] = " _ ";
+            }
+
+            foreach (string letter in emptyCharWordToBeGuessed)
+            {
+                Console.Write(letter);
+            }
+            Console.WriteLine();
         }
     }
 }
