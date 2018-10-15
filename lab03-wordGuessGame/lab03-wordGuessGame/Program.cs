@@ -10,14 +10,12 @@ namespace lab03_wordGuessGame
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             string path = "../../../myWords.txt";
             string[] initialWords = { "banana", "fox", "long" };
             CreateFile(path, initialWords);
 
-            PlayGame(path);
-            //AddWord(path, "cookie");
-            //RemoveWord(path, "banana");
+            WelcomeMenu(path);
+            
 
             //foreach (string word in ReadWords(path))
             //{
@@ -27,6 +25,29 @@ namespace lab03_wordGuessGame
 
         }
 
+        public static void WelcomeMenu(string path)
+        {
+            Console.WriteLine("Welcome to the Guessing Game!");
+            Console.WriteLine("Please select an option:");
+            Console.WriteLine("1 - Play Game");
+            Console.WriteLine("2 - Edit Game");
+            Console.WriteLine("3 - Exit");
+            int userOptionSelected = Int32.Parse(Console.ReadLine());
+
+            switch (userOptionSelected)
+            {
+                case 1:
+                    PlayGame(path);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    break;
+            }
+        }
         public static void CreateFile(string path, string[] initialWords)
         {
             try
@@ -185,7 +206,7 @@ namespace lab03_wordGuessGame
                     }
                 }
 
-                Console.WriteLine($"The word does not contain: {guessedLetters}");
+                Console.WriteLine($"Letters you guessed: {guessedLetters}");
                 foreach (string letter in hiddenWordToBeGuessed)
                 {
                     Console.Write(letter);

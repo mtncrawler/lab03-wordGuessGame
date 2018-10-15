@@ -36,6 +36,14 @@ namespace wordGuessGameTest
             Assert.DoesNotContain("pickles", Program.ReadWords(path));
         }
 
+        [Fact]
+        public void PlayGame()
+        {
+            string path = "../../../test.txt";
+            string[] initialWords = { "banana", "fox", "long" };
+            Program.CreateFile(path, initialWords);
+            //Assert.Equal()
+        }
         //[Fact]
         //public void ReadFileWorks()
         //{
