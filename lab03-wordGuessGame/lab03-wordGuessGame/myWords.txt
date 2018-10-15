@@ -1,3 +1,5 @@
 banana
 fox
-long
+ferry
+mountains
+compass
