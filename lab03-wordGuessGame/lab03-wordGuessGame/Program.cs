@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 
@@ -11,7 +12,7 @@ namespace lab03_wordGuessGame
         {
             Console.WriteLine("Hello World!");
             string path = "../../../myWords.txt";
-            string[] initialWords = { "banana", "sausage", "London" };
+            string[] initialWords = { "banana", "fox", "long" };
             CreateFile(path, initialWords);
 
             PlayGame(path);
@@ -143,18 +144,61 @@ namespace lab03_wordGuessGame
             string[] wordsForGame = ReadWords(path);
             int randomIndex = rand.Next(wordsForGame.Length);
             string gameSolutionWord = wordsForGame[randomIndex];
-            string[] emptyCharWordToBeGuessed = new string[gameSolutionWord.Length];
+            string[] hiddenWordToBeGuessed = new string[gameSolutionWord.Length];
 
             for (int i = 0; i < gameSolutionWord.Length; i++)
             {
-                emptyCharWordToBeGuessed[i] = " _ ";
+                hiddenWordToBeGuessed[i] = " _ ";
             }
 
-            foreach (string letter in emptyCharWordToBeGuessed)
+            foreach (string letter in hiddenWordToBeGuessed)
             {
                 Console.Write(letter);
             }
             Console.WriteLine();
+
+            bool success = false;
+            string guessedLetters = "";
+            while (!success)
+            {
+                Console.WriteLine("Can you guess a letter?");
+                string userLetterGuess = Console.ReadLine();
+                
+                guessedLetters += userLetterGuess;
+
+                for (int i = 0; i < hiddenWordToBeGuessed.Length; i++)
+                {
+                    if (String.Equals(hiddenWordToBeGuessed[i], userLetterGuess, StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        hiddenWordToBeGuessed[i] = userLetterGuess;
+                    }
+                }
+
+                if (gameSolutionWord.Contains(userLetterGuess))
+                {
+                    for (int i = 0; i < gameSolutionWord.Length; i++)
+                    {
+                        if (gameSolutionWord[i].ToString() == userLetterGuess)
+                        {
+                            hiddenWordToBeGuessed[i] = userLetterGuess;
+                        }
+                    }
+                }
+
+                Console.WriteLine($"The word does not contain: {guessedLetters}");
+                foreach (string letter in hiddenWordToBeGuessed)
+                {
+                    Console.Write(letter);
+                }
+                Console.WriteLine();
+                
+                if (!hiddenWordToBeGuessed.Contains(" _ "))
+                {
+                    Console.WriteLine("Well done, you got it!");
+                    success = true;
+                }
+
+            }
         }
     }
 }
