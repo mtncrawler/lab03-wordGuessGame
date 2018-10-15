@@ -15,12 +15,7 @@ namespace lab03_wordGuessGame
             CreateFile(path, initialWords);
 
             WelcomeMenu(path);
-            
 
-            //foreach (string word in ReadWords(path))
-            //{
-            //    Console.WriteLine(word);
-            //}
             //DeleteFile(path);
 
         }
@@ -29,9 +24,9 @@ namespace lab03_wordGuessGame
         {
             Console.WriteLine("Welcome to the Guessing Game!");
             Console.WriteLine("Please select an option:");
-            Console.WriteLine("1 - Play Game");
-            Console.WriteLine("2 - Edit Game");
-            Console.WriteLine("3 - Exit");
+            Console.WriteLine(" 1 - Play Game");
+            Console.WriteLine(" 2 - Edit Game");
+            Console.WriteLine(" 3 - Exit");
             int userOptionSelected = Int32.Parse(Console.ReadLine());
 
             switch (userOptionSelected)
@@ -40,14 +35,50 @@ namespace lab03_wordGuessGame
                     PlayGame(path);
                     break;
                 case 2:
+                    EditGameMenu(path);
                     break;
                 case 3:
                     Environment.Exit(0);
                     break;
-                default:
-                    break;
             }
         }
+
+        public static void EditGameMenu(string path)
+        {
+            Console.WriteLine("Edit Game Menu");
+            Console.WriteLine("Please select an option:");
+            Console.WriteLine(" 1 - View Words");
+            Console.WriteLine(" 2 - Add Word");
+            Console.WriteLine(" 3 - Remove");
+            Console.WriteLine(" 4 - Return Home");
+            int userOptionSelected = Int32.Parse(Console.ReadLine());
+
+            switch (userOptionSelected)
+            {
+                case 1:
+                    foreach (string word in ReadWords(path))
+                    {
+                        Console.WriteLine(word);
+                    }
+                    break;
+                case 2:
+                    Console.WriteLine("Enter a word to add to the game: ");
+                    string userNewWordToAdd = Console.ReadLine();
+                    AddWord(path, userNewWordToAdd);
+                    break;
+                case 3:
+                    Console.WriteLine("Enter a word to remove from the game: ");
+                    string userWordToRemove = Console.ReadLine();
+                    RemoveWord(path, userWordToRemove);
+                    break;
+                case 4:
+                    WelcomeMenu(path);
+                    break;
+
+            }
+
+        }
+
         public static void CreateFile(string path, string[] initialWords)
         {
             try
