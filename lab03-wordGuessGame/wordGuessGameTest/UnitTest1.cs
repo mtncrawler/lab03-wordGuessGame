@@ -44,12 +44,48 @@ namespace wordGuessGameTest
             Program.CreateFile(path, initialWords);
             //Assert.Equal()
         }
-        //[Fact]
-        //public void ReadFileWorks()
-        //{
-        //    string path = "../../../test.txt";
-        //    Program.ReadFile(path);
-        //    Assert.True(File.Exists());
-        //}
+
+        [Fact]
+        public void WordAdded()
+        {
+            string path = "../../../test.txt";
+            Program.AddWord(path, "chocolate");
+
+            Assert.Contains("chocolate", Program.ReadWords(path));
+        }
+
+        [Fact]
+        public void RetrieveAllWords()
+        {
+            string path = "../../../test.txt";
+            string[] words =
+            {
+                "banana",
+                "fox",
+                "long",
+                "chocolate"
+            };
+
+            Assert.Equal(words.Length, Program.ReadWords(path).Length);
+        }
+
+        [Fact]
+        public void ValidLetterGuessed()
+        {
+            string path = "../../../test.txt";
+            string letter = "b";
+
+            Assert.Contains(letter, Program.ReadWords(path)[0]);
+        }
+
+        [Fact]
+        public void InvalidLetterGuessed()
+        {
+            string path = "../../../test.txt";
+            string letter = "x";
+
+            Assert.DoesNotContain(letter, Program.ReadWords(path)[0]);
+        }
+
     }
 }
