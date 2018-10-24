@@ -28,7 +28,7 @@ namespace wordGuessGameTest
         [Fact]
         public void WordWasRemoved()
         {
-            string path = "../../../test.txt";
+            string path = "../../../test2.txt";
             string[] initialWords = { "georgia", "pickles", "volcano" };
             Program.CreateFile(path, initialWords);
             Program.RemoveWord(path, "pickles");
@@ -44,12 +44,46 @@ namespace wordGuessGameTest
             Program.CreateFile(path, initialWords);
             //Assert.Equal()
         }
-        //[Fact]
-        //public void ReadFileWorks()
-        //{
-        //    string path = "../../../test.txt";
-        //    Program.ReadFile(path);
-        //    Assert.True(File.Exists());
-        //}
+
+        [Fact]
+        public void WordAdded()
+        {
+            string path = "../../../test.txt";
+            Program.AddWord(path, "chocolate");
+
+            Assert.Contains("chocolate", Program.ReadWords(path));
+        }
+
+        [Fact]
+        public void RetrieveAllWords()
+        {
+            string path = "../../../test2.txt";
+            string[] words =
+            {
+                "georgia",
+                "volcano"
+            };
+
+            Assert.Equal(words.Length, Program.ReadWords(path).Length);
+        }
+
+        [Fact]
+        public void ValidLetterGuessed()
+        {
+            string path = "../../../test.txt";
+            string letter = "r";
+
+            Assert.Contains(letter, Program.ReadWords(path)[0]);
+        }
+
+        [Fact]
+        public void InvalidLetterGuessed()
+        {
+            string path = "../../../test.txt";
+            string letter = "x";
+
+            Assert.DoesNotContain(letter, Program.ReadWords(path)[0]);
+        }
+
     }
 }

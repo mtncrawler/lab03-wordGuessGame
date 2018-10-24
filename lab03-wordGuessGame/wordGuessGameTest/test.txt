@@ -1,1 +1,4 @@
-georgia
+banana
+fox
+long
+chocolate
