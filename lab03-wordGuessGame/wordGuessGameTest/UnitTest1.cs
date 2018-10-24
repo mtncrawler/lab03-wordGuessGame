@@ -28,7 +28,7 @@ namespace wordGuessGameTest
         [Fact]
         public void WordWasRemoved()
         {
-            string path = "../../../test.txt";
+            string path = "../../../test2.txt";
             string[] initialWords = { "georgia", "pickles", "volcano" };
             Program.CreateFile(path, initialWords);
             Program.RemoveWord(path, "pickles");
@@ -57,13 +57,11 @@ namespace wordGuessGameTest
         [Fact]
         public void RetrieveAllWords()
         {
-            string path = "../../../test.txt";
+            string path = "../../../test2.txt";
             string[] words =
             {
-                "banana",
-                "fox",
-                "long",
-                "chocolate"
+                "georgia",
+                "volcano"
             };
 
             Assert.Equal(words.Length, Program.ReadWords(path).Length);
@@ -73,7 +71,7 @@ namespace wordGuessGameTest
         public void ValidLetterGuessed()
         {
             string path = "../../../test.txt";
-            string letter = "b";
+            string letter = "r";
 
             Assert.Contains(letter, Program.ReadWords(path)[0]);
         }
